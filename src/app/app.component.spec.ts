@@ -1,12 +1,7 @@
 import { AppComponent } from './app.component'
-import {
-  byRole,
-  createComponentFactory,
-  Spectator,
-} from '@ngneat/spectator/jest'
+import { byRole, createComponentFactory } from '@ngneat/spectator/jest'
 
 describe('AppComponent', () => {
-  let spectator: Spectator<AppComponent>
   const createComponent = createComponentFactory(AppComponent)
 
   it('renders component', () => {

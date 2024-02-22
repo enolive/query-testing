@@ -4,10 +4,10 @@ import { byRole, createComponentFactory } from '@ngneat/spectator/jest'
 describe('AppComponent', () => {
   const createComponent = createComponentFactory(AppComponent)
 
-  it('renders component', () => {
+  it('renders component', async () => {
     const spectator = createComponent()
 
-    spectator.detectChanges()
+    await spectator.fixture.whenStable()
 
     const title = spectator.query(byRole('heading'))
     expect(title).toHaveText('Hello, Todos!')

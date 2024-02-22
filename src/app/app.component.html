@@ -1,10 +1,12 @@
 <h1>Hello, {{ title }}!</h1>
 
 @if (todosQuery$ | async; as todos) {
-  <ul>
+  @if (todos.isFetched) {
+    <ul>
 
-    @for (todo of todos.data; track todo.id) {
-      <li>{{ todo.title }}</li>
-    }
-  </ul>
+      @for (todo of todos.data; track todo.id) {
+        <li>{{ todo.title }}</li>
+      }
+    </ul>
+  }
 }

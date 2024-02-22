@@ -1,14 +1,24 @@
-import {AppComponent} from './app.component';
-import {render, screen, within} from "@testing-library/angular";
+import { AppComponent } from './app.component'
+import {
+  byRole,
+  createComponentFactory,
+  Spectator,
+} from '@ngneat/spectator/jest'
 
 describe('AppComponent', () => {
-  it('renders component', async () => {
-    await render(AppComponent)
+  let spectator: Spectator<AppComponent>
+  const createComponent = createComponentFactory(AppComponent)
 
-    const title = screen.getByRole('heading')
-    expect(title).toHaveTextContent('Hello, Todos!')
-    const list = await screen.findByRole('list')
-    const items = await within(list).findAllByRole('listitem');
+  it('renders component', () => {
+    const spectator = createComponent()
+
+    spectator.detectChanges()
+
+    const title = spectator.query(byRole('heading'))
+    expect(title).toHaveText('Hello, Todos!')
+    const list = spectator.query(byRole('list'))
+    expect(list).toExist()
+    const items = spectator.queryAll(byRole('listitem'))
     expect(items).not.toHaveLength(0)
-  });
-});
+  })
+})

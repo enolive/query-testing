@@ -6,10 +6,9 @@ describe('AppComponent', () => {
     await render(AppComponent)
 
     const title = screen.getByRole('heading')
-    expect(title).toHaveTextContent('Hello, untitled!')
+    expect(title).toHaveTextContent('Hello, Todos!')
     const list = await screen.findByRole('list')
     const items = await within(list).findAllByRole('listitem');
-    screen.debug(list)
     expect(items).not.toHaveLength(0)
   });
 });

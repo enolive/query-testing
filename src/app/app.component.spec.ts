@@ -19,7 +19,7 @@ describe('AppComponent', () => {
     const title = screen.getByRole('heading')
     expect(title).toHaveTextContent('Hello, Todos!')
     const list = await screen.findByRole('list')
-    const items = await within(list).findAllByRole('listitem')
+    const items = within(list).getAllByRole('listitem')
     expect(items).toHaveLength(todos.length)
     expect(items[0]).toHaveTextContent('First')
     expect(items[1]).toHaveTextContent('Second')
@@ -29,8 +29,7 @@ describe('AppComponent', () => {
 
 const fetchComments = jest.fn<Observable<Todo[]>, any>()
 
-function renderComponent() {
-  return render(AppComponent, {
+const renderComponent = () =>
+  render(AppComponent, {
     providers: [{ provide: ApiService, useValue: { fetchComments } }],
   })
-}
